@@ -1,20 +1,49 @@
-import React, { Component } from "react";
-import classes from "./Registration.module.css";
-import Button from "../UI/Button/Button";
-import Input from "../UI/Input/Input";
-import { validateEmail } from "../../utils/validateEmail";
-import axios from "axios";
+import React, { Component } from 'react';
+import classes from './Registration.module.css';
+import Button from '../UI/Button/Button';
+import Input from '../UI/Input/Input';
+import { validateEmail } from '../../utils/validateEmail';
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCount, increment } from '../../store';
+
+function RegistrationForm() {
+  // Rule 2: call hooks in function component
+  const count = useSelector(selectCount);
+
+  const dispatch = useDispatch();
+
+  return (
+    <div className="container">
+      <div className="row">
+        <h1>Регистрация {count}</h1>
+        <form
+          className={classes.RegistrationForm}
+          onSubmit={(event) => {
+            event.preventDefault();
+            dispatch(increment(3));
+          }}
+        >
+          {/* {this.renderInputs()} */}
+          <Button disabled={false} type="primary">
+            Зарегистрироваться
+          </Button>
+        </form>
+      </div>
+    </div>
+  );
+}
 
 class Registration extends Component {
   state = {
     isFormValid: false,
     formControls: {
       email: {
-        value: "",
-        type: "email",
-        label: "Email",
-        defaultErrorMessage: "Введите корректный email",
-        errorMessage: "Введите корректный email",
+        value: '',
+        type: 'email',
+        label: 'Email',
+        defaultErrorMessage: 'Введите корректный email',
+        errorMessage: 'Введите корректный email',
         valid: false,
         touched: false,
         validation: {
@@ -23,11 +52,11 @@ class Registration extends Component {
         },
       },
       password: {
-        value: "",
-        type: "password",
-        label: "Password",
-        defaultErrorMessage: "Введите корректный пароль",
-        errorMessage: "Введите корректный пароль",
+        value: '',
+        type: 'password',
+        label: 'Password',
+        defaultErrorMessage: 'Введите корректный пароль',
+        errorMessage: 'Введите корректный пароль',
         valid: false,
         touched: false,
         validation: {
@@ -36,11 +65,11 @@ class Registration extends Component {
         },
       },
       repeatPassword: {
-        value: "",
-        type: "password",
-        label: "Repeat Password",
-        defaultErrorMessage: "Пароли должны совпадать",
-        errorMessage: "Пароли должны совпадать",
+        value: '',
+        type: 'password',
+        label: 'Repeat Password',
+        defaultErrorMessage: 'Пароли должны совпадать',
+        errorMessage: 'Пароли должны совпадать',
         valid: false,
         touched: false,
         validation: {
@@ -59,7 +88,7 @@ class Registration extends Component {
     let isValid = true;
 
     if (validation.required) {
-      isValid = value.trim() !== "" && isValid;
+      isValid = value.trim() !== '' && isValid;
     }
 
     if (validation.email) {
@@ -123,11 +152,11 @@ class Registration extends Component {
         password: formControls.password.value,
         re_password: formControls.repeatPassword.value,
       };
-      let url = "http://localhost:8000/api/v1/auth/jwt/register/";
+      let url = 'http://localhost:8000/api/v1/auth/jwt/register/';
       const response = await axios.post(url, regData);
       const data = response.data;
       const token = data.access;
-      localStorage.setItem("token", token);
+      localStorage.setItem('token', token);
     } catch (error) {
       const formControls = { ...this.state.formControls };
       Object.keys(error.response.data).forEach((name) => {
@@ -139,28 +168,7 @@ class Registration extends Component {
   }
 
   render() {
-    return (
-      <div className="container">
-        <div className="row">
-          <h1>Регистрация</h1>
-          <form
-            className={classes.RegistrationForm}
-            onSubmit={this.submitHandler}
-          >
-            {this.renderInputs()}
-            <Button
-              disabled={!this.state.isFormValid}
-              type="primary"
-              onClick={() => {
-                this.registerHandler(this.state.formControls);
-              }}
-            >
-              Зарегистрироваться
-            </Button>
-          </form>
-        </div>
-      </div>
-    );
+    return <RegistrationForm />;
   }
 }
 
