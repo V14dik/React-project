@@ -18,11 +18,7 @@ const Input = (props) => {
       <label className="form-label" htmlFor={htmlFor}>
         {control.label}
       </label>
-      {isInvalid(control) ? (
-        <div className="alert alert-danger">
-          {control.errorMessage || "Введите верное значение"}
-        </div>
-      ) : null}
+
       <input
         className="form-control"
         type={inputType}
@@ -30,6 +26,11 @@ const Input = (props) => {
         value={control.value}
         onChange={props.onChange}
       />
+      {isInvalid(control) ? (
+        <div className="alert alert-danger">
+          {control.errorMessage || "Введите верное значение"}
+        </div>
+      ) : null}
     </div>
   );
 };

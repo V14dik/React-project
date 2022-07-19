@@ -110,16 +110,25 @@ class Registration extends Component {
   };
 
   async registerHandler(formControls) {
-    console.log(formControls);
-    const regData = {
-      email: formControls.email.value,
-      password: formControls.password.value,
-      re_password: formControls.repeatPassword.value,
-    };
-    let url = "http://localhost:8000/api/v1/auth/jwt/register/";
-    const response = await axios.post(url, regData);
-    const data = response.data;
-    console.log(data);
+    try {
+      const regData = {
+        email: formControls.email.value,
+        password: formControls.password.value,
+        re_password: formControls.repeatPassword.value,
+      };
+      let url = "http://localhost:8000/api/v1/auth/jwt/register/";
+      const response = await axios.post(url, regData);
+      const data = response.data;
+      const token = data.access;
+      localStorage.setItem("token", token);
+    } catch (error) {
+      const formControls = { ...this.state.formControls };
+      Object.keys(error.response.data).forEach((name) => {
+        formControls[name].valid = false;
+        formControls[name].errorMessage = error.response.data[name];
+      });
+      this.setState({ formControls });
+    }
   }
 
   render() {
