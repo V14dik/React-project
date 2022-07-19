@@ -13,6 +13,7 @@ class Registration extends Component {
         value: "",
         type: "email",
         label: "Email",
+        defaultErrorMessage: "Введите корректный email",
         errorMessage: "Введите корректный email",
         valid: false,
         touched: false,
@@ -25,6 +26,7 @@ class Registration extends Component {
         value: "",
         type: "password",
         label: "Password",
+        defaultErrorMessage: "Введите корректный пароль",
         errorMessage: "Введите корректный пароль",
         valid: false,
         touched: false,
@@ -37,6 +39,7 @@ class Registration extends Component {
         value: "",
         type: "password",
         label: "Repeat Password",
+        defaultErrorMessage: "Пароли должны совпадать",
         errorMessage: "Пароли должны совпадать",
         valid: false,
         touched: false,
@@ -76,6 +79,10 @@ class Registration extends Component {
   onChangeHandler = (event, controlName) => {
     const formControls = { ...this.state.formControls };
     const control = { ...formControls[controlName] };
+
+    if (control.errorMessage !== control.defaultErrorMessage) {
+      control.errorMessage = control.defaultErrorMessage;
+    }
 
     control.value = event.target.value;
     control.touched = true;
