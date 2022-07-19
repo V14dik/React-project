@@ -1,15 +1,9 @@
 import React, { Component } from "react";
 import classes from "./Registration.module.css";
-import Button from "./UI/Button/Button";
-import Input from "./UI/Input/Input";
-
-const validateEmail = (email) => {
-  return String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-};
+import Button from "../UI/Button/Button";
+import Input from "../UI/Input/Input";
+import { validateEmail } from "../../utils/validateEmail";
+import axios from "axios";
 
 class Registration extends Component {
   state = {
@@ -25,7 +19,6 @@ class Registration extends Component {
         validation: {
           required: true,
           email: true,
-          isRepeatPassword: false,
         },
       },
       password: {
@@ -38,19 +31,17 @@ class Registration extends Component {
         validation: {
           required: true,
           minLength: 8,
-          isRepeatPassword: false,
         },
       },
       repeatPassword: {
         value: "",
         type: "password",
         label: "Repeat Password",
-        errorMessage: "Пароли доджны совпадать",
+        errorMessage: "Пароли должны совпадать",
         valid: false,
         touched: false,
         validation: {
           required: true,
-          minLength: 8,
           isRepeatPassword: true,
         },
       },
@@ -106,15 +97,9 @@ class Registration extends Component {
       const control = this.state.formControls[controlName];
       return (
         <Input
-          key={controlName + index}
-          type={control.type}
-          value={control.value}
-          valid={control.valid}
-          touched={control.touched}
-          label={control.label}
-          shouldValidate={!!control.validation}
-          errorMessage={control.errorMessage}
+          control={control}
           onChange={(event) => this.onChangeHandler(event, controlName)}
+          key={controlName + index}
         />
       );
     });
@@ -124,14 +109,23 @@ class Registration extends Component {
     event.preventDefault();
   };
 
-  registerHandler() {
-    console.log("Success");
+  async registerHandler(formControls) {
+    console.log(formControls);
+    const regData = {
+      email: formControls.email.value,
+      password: formControls.password.value,
+      re_password: formControls.repeatPassword.value,
+    };
+    let url = "http://localhost:8000/api/v1/auth/jwt/register/";
+    const response = await axios.post(url, regData);
+    const data = response.data;
+    console.log(data);
   }
 
   render() {
     return (
-      <div className={classes.Registration}>
-        <div>
+      <div className="container">
+        <div className="row">
           <h1>Регистрация</h1>
           <form
             className={classes.RegistrationForm}
@@ -141,7 +135,9 @@ class Registration extends Component {
             <Button
               disabled={!this.state.isFormValid}
               type="primary"
-              onClick={this.registerHandler}
+              onClick={() => {
+                this.registerHandler(this.state.formControls);
+              }}
             >
               Зарегистрироваться
             </Button>
