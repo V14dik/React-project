@@ -1,13 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import rootReducer from "./store/reducers/rootReducer";
+import "./index.scss";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
+import { configureStore } from "@reduxjs/toolkit";
+import thunk from "redux-thunk";
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-import './index.scss';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
-import store from './store';
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const middleWare = [thunk];
+
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: middleWare,
+});
 
 const app = (
   <Provider store={store}>

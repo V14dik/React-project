@@ -9,10 +9,6 @@ const Input = (props) => {
   const control = props.control;
   const inputType = control.type || "text";
   const htmlFor = `${inputType}-${Math.random()}`;
-
-  if (isInvalid(control)) {
-  }
-
   return (
     <div className="mb-3">
       <label className="form-label" htmlFor={htmlFor}>
