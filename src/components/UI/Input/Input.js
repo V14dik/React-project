@@ -1,18 +1,17 @@
 import React from "react";
 
-function isInvalid({ valid, touched, validation }) {
-  const shouldValidate = !!validation;
-  return !valid && shouldValidate && touched;
+function isInvalid({ valid, touched }) {
+  return !valid && touched;
 }
 
 const Input = (props) => {
   const control = props.control;
-  const inputType = control.type || "text";
+  const inputType = props.type;
   const htmlFor = `${inputType}-${Math.random()}`;
   return (
     <div className="mb-3">
       <label className="form-label" htmlFor={htmlFor}>
-        {control.label}
+        {props.label}
       </label>
 
       <input
@@ -23,9 +22,7 @@ const Input = (props) => {
         onChange={props.onChange}
       />
       {isInvalid(control) ? (
-        <div className="alert alert-danger">
-          {control.errorMessage || "Введите верное значение"}
-        </div>
+        <div className="alert alert-danger">{control.errorMessage}</div>
       ) : null}
     </div>
   );

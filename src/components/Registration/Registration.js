@@ -1,19 +1,12 @@
-import React, { Component, useReducer } from "react";
 import Button from "../UI/Button/Button";
 import Input from "../UI/Input/Input";
-import axios from "axios";
-import {
-  changeControl,
-  registerAccount,
-} from "../../store/actions/registration";
-import { initialState } from "../../store/reducers/registration";
-import { registerReducer } from "../../store/reducers/registration";
+import { changeControl } from "../../store/actions/registration";
+import { registerAccount } from "../../store/actions/user";
+import { useDispatch, useSelector } from "react-redux";
 
 function RegistrationForm() {
-  const [state, dispatch] = useReducer(registerReducer, initialState);
-  const formControls = state.formControls;
-  const isFormValid = state.isFormValid;
-
+  const dispatch = useDispatch();
+  const { formControls, isFormValid } = useSelector(({ register }) => register);
   const onChangeHandler = (event, controlName) => {
     dispatch(changeControl(formControls, event.target.value, controlName));
   };
@@ -30,14 +23,20 @@ function RegistrationForm() {
         >
           <Input
             control={formControls.email}
+            type={"email"}
+            label={"Email"}
             onChange={(event) => onChangeHandler(event, "email")}
           />
           <Input
             control={formControls.password}
+            type={"password"}
+            label={"Password"}
             onChange={(event) => onChangeHandler(event, "password")}
           />
           <Input
             control={formControls.repeatPassword}
+            type={"password"}
+            label={"Repeat Password"}
             onChange={(event) => onChangeHandler(event, "repeatPassword")}
           />
           <Button disabled={!isFormValid} type="primary">

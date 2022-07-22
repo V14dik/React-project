@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import rootReducer from "./store/reducers/rootReducer";
+import { rootReducer } from "./store/reducers/rootReducer";
 import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -10,11 +10,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const middleWare = [thunk];
+const middleware = [thunk];
 
 const store = configureStore({
   reducer: rootReducer,
-  middleware: middleWare,
+  middleware: middleware,
 });
 
 const app = (
