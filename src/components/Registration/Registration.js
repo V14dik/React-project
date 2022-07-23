@@ -1,12 +1,14 @@
 import Button from "../UI/Button/Button";
 import Input from "../UI/Input/Input";
 import { changeControl } from "../../store/actions/registration";
-import { registerAccount } from "../../store/actions/user";
+import { formError, registerAccount } from "../../store/actions/user";
 import { useDispatch, useSelector } from "react-redux";
 
 function RegistrationForm() {
   const dispatch = useDispatch();
-  const { formControls, isFormValid } = useSelector(({ register }) => register);
+  const { formControls, isFormValid, formErrorMessage } = useSelector(
+    ({ register }) => register
+  );
   const onChangeHandler = (event, controlName) => {
     dispatch(changeControl(formControls, event.target.value, controlName));
   };
@@ -15,9 +17,13 @@ function RegistrationForm() {
     <div className="container">
       <div className="row">
         <h1>Регистрация</h1>
+        {formErrorMessage ? (
+          <div className="alert alert-danger">{formErrorMessage}</div>
+        ) : null}
         <form
           onSubmit={(event) => {
             event.preventDefault();
+            dispatch(formError(""));
             dispatch(registerAccount(formControls));
           }}
         >

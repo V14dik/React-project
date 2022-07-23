@@ -16,15 +16,24 @@ export const changeControl = (formControls, newValue, controlName) => {
     case "email":
       control.valid =
         validateRequeired(control.value) && validateEmail(control.value);
+      if (!control.valid) {
+        control.errorMessage = "Введите корректный email";
+      }
       break;
     case "password":
       control.valid =
         validateRequeired(control.value) && validateMinLength(control.value, 8);
+      if (!control.valid) {
+        control.errorMessage = "Введите корректный пароль";
+      }
       break;
     case "repeatPassword":
       control.valid =
         validateRequeired(control.value) &&
         isRepeatPassword(controls.password.value, control.value);
+      if (!control.valid) {
+        control.errorMessage = "Пароли должны совпадать";
+      }
       break;
     default:
       break;
