@@ -31,7 +31,7 @@ test("Should return true if string is not empty", () => {
 });
 
 test("Should return is the params are equal", () => {
-  expect(isRepeatPassword("qweqwe", "qweqwe")).toBe(true);
-  expect(isRepeatPassword("qweqweq", "qweqwe")).toBe(false);
-  expect(isRepeatPassword("QWEQWE", "qweqwe")).toBe(false);
+  expect(isRepeatPassword("test", "test")).toBe(true);
+  expect(isRepeatPassword("test1", "test")).toBe(false);
+  expect(isRepeatPassword("TEST", "test")).toBe(false);
 });

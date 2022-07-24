@@ -1,4 +1,4 @@
-import { CHANGE_FORM_CONTROL } from "./actionTypes";
+import { CHANGE_FORM_CONTROL, CHANGE_FORM_ERROR_MESSAGE } from "./actionTypes";
 import {
   validateRequeired,
   validateMinLength,
@@ -56,3 +56,12 @@ export const changeControl = (formControls, newValue, controlName) => {
     payload: payload,
   };
 };
+
+export function formError(formErrorMessage) {
+  return {
+    type: CHANGE_FORM_ERROR_MESSAGE,
+    payload: {
+      errorMessage: formErrorMessage,
+    },
+  };
+}

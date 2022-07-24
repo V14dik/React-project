@@ -1,9 +1,6 @@
 import axios from "axios";
-import {
-  CHANGE_FORM_CONTROL,
-  CHANGE_FORM_ERROR_MESSAGE,
-  REGISTER_ACCOUNT_SUCCESS,
-} from "./actionTypes";
+import { CHANGE_FORM_CONTROL, REGISTER_ACCOUNT_SUCCESS } from "./actionTypes";
+import { formError } from "./registration";
 
 export function registerAccount(formControls) {
   const controls = ["email", "password", "re_password"];
@@ -54,15 +51,6 @@ export function registerAccountError(controlName, control) {
       isFormvalid: false,
       changedInputName: controlName,
       changedInput: { ...control },
-    },
-  };
-}
-
-export function formError(formErrorMessage) {
-  return {
-    type: CHANGE_FORM_ERROR_MESSAGE,
-    payload: {
-      errorMessage: formErrorMessage,
     },
   };
 }
