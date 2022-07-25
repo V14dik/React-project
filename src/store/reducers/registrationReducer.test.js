@@ -1,6 +1,8 @@
 import { registerReducer } from "./registration";
-import { changeControl } from "../actions/registration";
-import { formError } from "../actions/registration";
+import {
+  CHANGE_FORM_CONTROL,
+  CHANGE_FORM_ERROR_MESSAGE,
+} from "../actions/actionTypes";
 
 let state = {
   isFormValid: false,
@@ -15,41 +17,33 @@ let state = {
   },
 };
 
-let oldFormControls = {
-  isFormValid: false,
-  formErrorMessage: "",
-  formControls: {
-    email: {
-      value: "",
-      errorMessage: "Введите корректный email",
-      valid: false,
-      touched: false,
+test("Should edit one of the form's controls", () => {
+  const action = {
+    type: CHANGE_FORM_CONTROL,
+    payload: {
+      isFormValid: "test",
+      changedInputName: "test",
     },
-  },
-};
-
-test("Should edit one of the form's controls", () => {
-  let action = changeControl(oldFormControls, "test", "email");
-  let newState = registerReducer(state, action);
-  expect(newState.formControls.email.value).toBe("test");
-  expect(newState.formControls.email.valid).toBe(false);
-});
-
-test("Should edit one of the form's controls", () => {
-  let action = changeControl(oldFormControls, "test@mail.com", "email");
-  let newState = registerReducer(state, action);
-  expect(newState.formControls.email.value).toBe("test@mail.com");
-  expect(newState.formControls.email.valid).toBe(true);
+  };
+  expect(registerReducer(state, action)).toEqual({
+    ...state,
+    isFormValid: action.payload.isFormValid,
+    formControls: {
+      ...state.formControls,
+      [action.payload.changedInputName]: action.payload.changedInput,
+    },
+  });
 });
 
 test("Should edit form error message", () => {
-  let action = formError("New test error message");
-  let newState = registerReducer(state, action);
-  expect(newState.formErrorMessage).toBe("New test error message");
-});
-
-test("Should edit form error message", () => {
-  let action = formError("");
-  let newState = registerReducer(state, action);
-  expect(newState.formErrorMessage).toBe("");
+  let action = {
+    type: CHANGE_FORM_ERROR_MESSAGE,
+    payload: {
+      errorMessage: "test error message",
+    },
+  };
+  expect(registerReducer(state, action)).toEqual({
+    ...state,
+    formErrorMessage: action.payload.errorMessage,
+  });
 });

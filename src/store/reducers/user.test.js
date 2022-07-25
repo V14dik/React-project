@@ -9,6 +9,8 @@ test("Should set user token", () => {
     type: REGISTER_ACCOUNT_SUCCESS,
     token: "testToken12345678",
   };
-  let newState = userReducer(state, action);
-  expect(newState.userToken).toBe("testToken12345678");
+  expect(userReducer(state, action)).toEqual({
+    ...state,
+    userToken: action.token,
+  });
 });
