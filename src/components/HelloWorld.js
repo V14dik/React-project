@@ -5,7 +5,9 @@ export const HelloWorld = () => {
   return (
     <div>
       <h1>Hello World </h1>
-      <Link to={"/registration"}>Registration</Link>
+      <Link to={"/registration"}>Регистрация</Link>
+      <br />
+      <Link to={"logIn"}>Вход</Link>
     </div>
   );
 };

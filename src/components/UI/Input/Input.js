@@ -13,7 +13,6 @@ const Input = (props) => {
       <label className="form-label" htmlFor={htmlFor}>
         {props.label}
       </label>
-
       <input
         className="form-control"
         type={inputType}

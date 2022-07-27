@@ -1,14 +1,15 @@
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { changeControl, formError } from "../../store/actions/registration";
 import Button from "../UI/Button/Button";
 import Input from "../UI/Input/Input";
-import { changeControl, formError } from "../../store/actions/registration";
-import { registerAccount } from "../../store/actions/user";
-import { useDispatch, useSelector } from "react-redux";
 
-function RegistrationForm() {
+export function LogIn() {
   const dispatch = useDispatch();
   const { formControls, isFormValid, formErrorMessage } = useSelector(
     ({ register }) => register
   );
+
   const onChangeHandler = (event, controlName) => {
     dispatch(changeControl(formControls, event.target.value, controlName));
   };
@@ -16,7 +17,7 @@ function RegistrationForm() {
   return (
     <div className="container">
       <div className="row">
-        <h1>Регистрация</h1>
+        <h1>Вход</h1>
         {formErrorMessage ? (
           <div className="alert alert-danger">{formErrorMessage}</div>
         ) : null}
@@ -24,7 +25,6 @@ function RegistrationForm() {
           onSubmit={(event) => {
             event.preventDefault();
             dispatch(formError(""));
-            dispatch(registerAccount(formControls));
           }}
         >
           <Input
@@ -39,19 +39,9 @@ function RegistrationForm() {
             label={"Password"}
             onChange={(event) => onChangeHandler(event, "password")}
           />
-          <Input
-            control={formControls.repeatPassword}
-            type={"password"}
-            label={"Repeat Password"}
-            onChange={(event) => onChangeHandler(event, "repeatPassword")}
-          />
-          <Button disabled={!isFormValid} type="primary">
-            Зарегистрироваться
-          </Button>
+          <Button type="primary">Зарегистрироваться</Button>
         </form>
       </div>
     </div>
   );
 }
-
-export default RegistrationForm;
