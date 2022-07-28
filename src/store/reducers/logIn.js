@@ -1,7 +1,4 @@
-import {
-  CHANGE_REGISTER_FORM_CONTROL,
-  CHANGE_FORM_ERROR_MESSAGE,
-} from "../actions/actionTypes";
+import { CHANGE_LOG_IN_FORM_CONTROL } from "../actions/actionTypes";
 
 const initialState = {
   isFormValid: false,
@@ -19,18 +16,12 @@ const initialState = {
       valid: false,
       touched: false,
     },
-    repeatPassword: {
-      value: "",
-      errorMessage: "Пароли должны совпадать",
-      valid: false,
-      touched: false,
-    },
   },
 };
 
-export function registerReducer(state = initialState, action) {
+export function logInReducer(state = initialState, action) {
   switch (action.type) {
-    case CHANGE_REGISTER_FORM_CONTROL:
+    case CHANGE_LOG_IN_FORM_CONTROL:
       return {
         ...state,
         isFormValid: action.payload.isFormValid,
@@ -38,11 +29,6 @@ export function registerReducer(state = initialState, action) {
           ...state.formControls,
           [action.payload.changedInputName]: action.payload.changedInput,
         },
-      };
-    case CHANGE_FORM_ERROR_MESSAGE:
-      return {
-        ...state,
-        formErrorMessage: action.payload.errorMessage,
       };
     default:
       return state;

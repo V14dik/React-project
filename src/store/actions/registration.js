@@ -1,4 +1,8 @@
-import { CHANGE_FORM_CONTROL, CHANGE_FORM_ERROR_MESSAGE } from "./actionTypes";
+import {
+  CHANGE_REGISTER_FORM_CONTROL,
+  CHANGE_FORM_ERROR_MESSAGE,
+  CHANGE_LOG_IN_FORM_CONTROL,
+} from "./actionTypes";
 import {
   validateRequeired,
   validateMinLength,
@@ -42,7 +46,6 @@ export const changeControl = (formControls, newValue, controlName) => {
   controls[controlName] = control;
 
   let isFormValid = true;
-
   Object.keys(controls).forEach((name) => {
     isFormValid = controls[name].valid && isFormValid;
   });
@@ -51,8 +54,14 @@ export const changeControl = (formControls, newValue, controlName) => {
     changedInputName: controlName,
     changedInput: { ...control },
   };
+  if (Object.keys(controls).length === 2) {
+    return {
+      type: CHANGE_LOG_IN_FORM_CONTROL,
+      payload: payload,
+    };
+  }
   return {
-    type: CHANGE_FORM_CONTROL,
+    type: CHANGE_REGISTER_FORM_CONTROL,
     payload: payload,
   };
 };

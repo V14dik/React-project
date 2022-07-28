@@ -7,7 +7,7 @@ import Input from "../UI/Input/Input";
 export function LogIn() {
   const dispatch = useDispatch();
   const { formControls, isFormValid, formErrorMessage } = useSelector(
-    ({ register }) => register
+    ({ logIn }) => logIn
   );
 
   const onChangeHandler = (event, controlName) => {
@@ -39,7 +39,9 @@ export function LogIn() {
             label={"Password"}
             onChange={(event) => onChangeHandler(event, "password")}
           />
-          <Button type="primary">Зарегистрироваться</Button>
+          <Button disabled={!isFormValid} type="primary">
+            Войти
+          </Button>
         </form>
       </div>
     </div>

@@ -1,4 +1,7 @@
-import { CHANGE_FORM_CONTROL, CHANGE_FORM_ERROR_MESSAGE } from "./actionTypes";
+import {
+  CHANGE_REGISTER_FORM_CONTROL,
+  CHANGE_FORM_ERROR_MESSAGE,
+} from "./actionTypes";
 import { changeControl, formError } from "./registration";
 
 test("Should return action", () => {
@@ -20,7 +23,7 @@ test("Should return action", () => {
     },
   };
   expect(changeControl(formControls, "testvalue", "email")).toEqual({
-    type: CHANGE_FORM_CONTROL,
+    type: CHANGE_REGISTER_FORM_CONTROL,
     payload: payload,
   });
 });

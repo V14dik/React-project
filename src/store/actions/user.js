@@ -1,5 +1,8 @@
 import axios from "axios";
-import { CHANGE_FORM_CONTROL, REGISTER_ACCOUNT_SUCCESS } from "./actionTypes";
+import {
+  CHANGE_REGISTER_FORM_CONTROL,
+  REGISTER_ACCOUNT_SUCCESS,
+} from "./actionTypes";
 import { formError } from "./registration";
 
 export function registerAccount(formControls) {
@@ -46,7 +49,7 @@ export function registerAccountSuccess(token) {
 
 export function registerAccountError(controlName, control) {
   return {
-    type: CHANGE_FORM_CONTROL,
+    type: CHANGE_REGISTER_FORM_CONTROL,
     payload: {
       isFormvalid: false,
       changedInputName: controlName,

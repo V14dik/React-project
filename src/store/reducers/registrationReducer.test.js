@@ -1,6 +1,6 @@
 import { registerReducer } from "./registration";
 import {
-  CHANGE_FORM_CONTROL,
+  CHANGE_REGISTER_FORM_CONTROL,
   CHANGE_FORM_ERROR_MESSAGE,
 } from "../actions/actionTypes";
 
@@ -19,7 +19,7 @@ let state = {
 
 test("Should edit one of the form's controls", () => {
   const action = {
-    type: CHANGE_FORM_CONTROL,
+    type: CHANGE_REGISTER_FORM_CONTROL,
     payload: {
       isFormValid: "test",
       changedInputName: "test",

@@ -1,4 +1,7 @@
-import { CHANGE_FORM_CONTROL, REGISTER_ACCOUNT_SUCCESS } from "./actionTypes";
+import {
+  CHANGE_REGISTER_FORM_CONTROL,
+  REGISTER_ACCOUNT_SUCCESS,
+} from "./actionTypes";
 import { registerAccountSuccess, registerAccountError } from "./user";
 
 test("Should return action with user token", () => {
@@ -16,7 +19,7 @@ test("Should return action whith changed input", () => {
     touched: false,
   };
   expect(registerAccountError("email", control)).toEqual({
-    type: CHANGE_FORM_CONTROL,
+    type: CHANGE_REGISTER_FORM_CONTROL,
     payload: {
       isFormvalid: false,
       changedInputName: "email",
