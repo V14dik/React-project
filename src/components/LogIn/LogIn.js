@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeControl, formError } from "../../store/actions/registration";
+import { logIn } from "../../store/actions/logIn";
+import { changeControl } from "../../store/actions/registration";
+import { logInFormError } from "../../store/actions/logIn";
 import Button from "../UI/Button/Button";
 import Input from "../UI/Input/Input";
 
@@ -24,7 +26,8 @@ export function LogIn() {
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            dispatch(formError(""));
+            dispatch(logInFormError(""));
+            dispatch(logIn(formControls));
           }}
         >
           <Input

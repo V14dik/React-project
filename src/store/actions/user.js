@@ -3,7 +3,7 @@ import {
   CHANGE_REGISTER_FORM_CONTROL,
   REGISTER_ACCOUNT_SUCCESS,
 } from "./actionTypes";
-import { formError } from "./registration";
+import { registrationFormError } from "./registration";
 
 export function registerAccount(formControls) {
   const controls = ["email", "password", "re_password"];
@@ -31,7 +31,7 @@ export function registerAccount(formControls) {
           dispatch(registerAccountError(errorControlName, control));
         } else {
           const errorMessage = error.response.data[errorControlName];
-          dispatch(formError(errorMessage));
+          dispatch(registrationFormError(errorMessage));
         }
       } else {
         alert(error.response.data[errorControlName]);

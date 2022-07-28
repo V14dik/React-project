@@ -1,4 +1,7 @@
-import { CHANGE_LOG_IN_FORM_CONTROL } from "../actions/actionTypes";
+import {
+  CHANGE_LOG_IN_FORM_CONTROL,
+  CHANGE_LOG_IN_FORM_ERROR,
+} from "../actions/actionTypes";
 
 const initialState = {
   isFormValid: false,
@@ -29,6 +32,11 @@ export function logInReducer(state = initialState, action) {
           ...state.formControls,
           [action.payload.changedInputName]: action.payload.changedInput,
         },
+      };
+    case CHANGE_LOG_IN_FORM_ERROR:
+      return {
+        ...state,
+        formErrorMessage: action.payload.errorMessage,
       };
     default:
       return state;

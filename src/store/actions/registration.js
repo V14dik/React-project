@@ -1,6 +1,6 @@
 import {
   CHANGE_REGISTER_FORM_CONTROL,
-  CHANGE_FORM_ERROR_MESSAGE,
+  CHANGE_REGISTRATION_FORM_ERROR_MESSAGE,
   CHANGE_LOG_IN_FORM_CONTROL,
 } from "./actionTypes";
 import {
@@ -66,9 +66,9 @@ export const changeControl = (formControls, newValue, controlName) => {
   };
 };
 
-export function formError(formErrorMessage) {
+export function registrationFormError(formErrorMessage) {
   return {
-    type: CHANGE_FORM_ERROR_MESSAGE,
+    type: CHANGE_REGISTRATION_FORM_ERROR_MESSAGE,
     payload: {
       errorMessage: formErrorMessage,
     },
