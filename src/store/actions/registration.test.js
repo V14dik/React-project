@@ -1,8 +1,8 @@
 import {
   CHANGE_REGISTER_FORM_CONTROL,
-  CHANGE_FORM_ERROR_MESSAGE,
+  CHANGE_REGISTRATION_FORM_ERROR_MESSAGE,
 } from "./actionTypes";
-import { changeControl, formError } from "./registration";
+import { changeControl, registrationFormError } from "./registration";
 
 test("Should return action", () => {
   const formControls = {
@@ -29,8 +29,8 @@ test("Should return action", () => {
 });
 
 test("Should return action whith new form error", () => {
-  expect(formError("Test form error")).toEqual({
-    type: CHANGE_FORM_ERROR_MESSAGE,
+  expect(registrationFormError("Test form error")).toEqual({
+    type: CHANGE_REGISTRATION_FORM_ERROR_MESSAGE,
     payload: {
       errorMessage: "Test form error",
     },

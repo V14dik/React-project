@@ -1,7 +1,7 @@
 import { registerReducer } from "./registration";
 import {
   CHANGE_REGISTER_FORM_CONTROL,
-  CHANGE_FORM_ERROR_MESSAGE,
+  CHANGE_REGISTRATION_FORM_ERROR_MESSAGE,
 } from "../actions/actionTypes";
 
 let state = {
@@ -37,7 +37,7 @@ test("Should edit one of the form's controls", () => {
 
 test("Should edit form error message", () => {
   let action = {
-    type: CHANGE_FORM_ERROR_MESSAGE,
+    type: CHANGE_REGISTRATION_FORM_ERROR_MESSAGE,
     payload: {
       errorMessage: "test error message",
     },
