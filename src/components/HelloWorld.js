@@ -7,7 +7,9 @@ export const HelloWorld = () => {
       <h1>Hello World </h1>
       <Link to={"/registration"}>Регистрация</Link>
       <br />
-      <Link to={"logIn"}>Вход</Link>
+      <Link to={"/logIn"}>Вход</Link>
+      <br />
+      <Link to={"/users"}>Пользователи</Link>
     </div>
   );
 };
