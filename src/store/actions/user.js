@@ -4,6 +4,7 @@ import {
   REGISTER_ACCOUNT_SUCCESS,
 } from "./actionTypes";
 import { registrationFormError } from "./registration";
+import { toast } from "react-toastify";
 
 export function registerAccount(formControls) {
   const controls = ["email", "password", "re_password"];
@@ -20,6 +21,10 @@ export function registerAccount(formControls) {
       const token = data.access;
       localStorage.setItem("token", token);
       dispatch(registerAccountSuccess(token));
+      toast.success("Вы зарегистрированы!", {
+        position: toast.POSITION.TOP_CENTER,
+        theme: "colored",
+      });
     } catch (error) {
       const errorControlName = Object.keys(error.response.data)[0];
       if (error.response.status === 400) {
@@ -34,7 +39,10 @@ export function registerAccount(formControls) {
           dispatch(registrationFormError(errorMessage));
         }
       } else {
-        alert(error.response.data[errorControlName]);
+        toast.error(error.response.data[errorControlName], {
+          position: toast.POSITION.TOP_CENTER,
+          theme: "colored",
+        });
       }
     }
   };

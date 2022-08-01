@@ -6,6 +6,7 @@ import {
 } from "../../store/actions/registration";
 import { registerAccount } from "../../store/actions/user";
 import { useDispatch, useSelector } from "react-redux";
+import { Toast } from "../UI/Toast/Toast";
 
 function RegistrationForm() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ function RegistrationForm() {
   return (
     <div className="container">
       <div className="row">
+        <Toast />
         <h1>Регистрация</h1>
         {formErrorMessage ? (
           <div className="alert alert-danger">{formErrorMessage}</div>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import {
   CHANGE_LOG_IN_FORM_ERROR,
   CHANGE_LOG_IN_FORM_CONTROL,
@@ -33,7 +34,10 @@ export const logIn = (formControls) => {
           dispatch(logInFormError(errorMessage));
         }
       } else {
-        alert(error.response.data[errorControlName]);
+        toast.error(error.response.data[errorControlName], {
+          position: toast.POSITION.TOP_CENTER,
+          theme: "colored",
+        });
       }
     }
   };
