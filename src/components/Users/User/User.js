@@ -1,6 +1,14 @@
 import React from "react";
+import { deleteUser } from "../../../store/actions/user";
+import { useDispatch } from "react-redux";
 
 export const User = (props) => {
+  const dispatch = useDispatch();
+
+  const onDeleteHandler = () => {
+    dispatch(deleteUser(props.users, props.index));
+  };
+
   return (
     <div className="mb-4 d-flex justify-content-between flex-column align-items-center">
       <img
@@ -13,7 +21,9 @@ export const User = (props) => {
       </div>
       <div className="d-flex justify-content-around w-100">
         <button className="btn btn-warning">edit</button>
-        <button className="btn btn-danger">delete</button>
+        <button className="btn btn-danger" onClick={onDeleteHandler}>
+          delete
+        </button>
       </div>
     </div>
   );

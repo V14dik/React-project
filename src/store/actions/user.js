@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   CHANGE_REGISTER_FORM_CONTROL,
+  DELETE_USER,
   REGISTER_ACCOUNT_SUCCESS,
 } from "./actionTypes";
 import { registrationFormError } from "./registration";
@@ -62,6 +63,16 @@ export function registerAccountError(controlName, control) {
       isFormvalid: false,
       changedInputName: controlName,
       changedInput: { ...control },
+    },
+  };
+}
+
+export function deleteUser(users, key) {
+  delete users[key];
+  return {
+    type: DELETE_USER,
+    payload: {
+      users: users,
     },
   };
 }

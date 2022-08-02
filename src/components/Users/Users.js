@@ -1,9 +1,10 @@
 import React from "react";
 import { User } from "./User/User";
+import { useSelector } from "react-redux";
 import { store } from "../..";
 
 export const Users = () => {
-  const users = store.getState().user.users;
+  const { users } = useSelector(({ user }) => user);
   return (
     <div className="container text-center">
       <h2>Users</h2>
@@ -13,7 +14,9 @@ export const Users = () => {
             <User
               name={users[user].userName}
               mail={users[user].userMail}
-              key={user}
+              index={user}
+              users={users}
+              key={users[user].userName + users[user].userMail}
             />
           );
         })}
