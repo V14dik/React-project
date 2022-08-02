@@ -1,0 +1,30 @@
+{
+    "0": {
+        "userMail": "firstUser@mail.com",
+        "userName": "User 1"
+    },
+    "1": {
+        "userMail": "secondUser@mail.com",
+        "userName": "User 2"
+    },
+    "2": {
+        "userMail": "user-mail@gmail.com",
+        "userName": "User 3"
+    },
+    "3": {
+        "userMail": "userfour@mail.com",
+        "userName": "User 4"
+    },
+    "4": {
+        "userMail": "user@mail.com",
+        "userName": "User 5"
+    },
+    "5": {
+        "userMail": "qweUser@mail.com",
+        "userName": "User qwe"
+    },
+    "6": {
+        "userMail": "lastUser@mail.com",
+        "userName": "User 6"
+    }
+}

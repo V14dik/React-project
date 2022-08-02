@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const middleware = [thunk];
 
-const store = configureStore({
+export const store = configureStore({
   reducer: rootReducer,
   middleware: middleware,
 });
