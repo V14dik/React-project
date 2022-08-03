@@ -1,6 +1,7 @@
 import React from "react";
 import { deleteUser } from "../../../store/actions/user";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 export const User = (props) => {
   const dispatch = useDispatch();
@@ -16,11 +17,13 @@ export const User = (props) => {
         className="img-thumbnail w-75 "
       />
       <div>
-        <p>{props.name}</p>
-        <p>{props.mail}</p>
+        <p>{props.user.userName}</p>
+        <p>{props.user.userMail}</p>
       </div>
       <div className="d-flex justify-content-around w-100">
-        <button className="btn btn-warning">edit</button>
+        <Link className="btn btn-warning" to={"/user/" + props.index}>
+          edit
+        </Link>
         <button className="btn btn-danger" onClick={onDeleteHandler}>
           delete
         </button>

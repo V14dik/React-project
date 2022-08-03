@@ -1,4 +1,8 @@
-import { REGISTER_ACCOUNT_SUCCESS, DELETE_USER } from "../actions/actionTypes";
+import {
+  REGISTER_ACCOUNT_SUCCESS,
+  DELETE_USER,
+  CHANGE_USER,
+} from "../actions/actionTypes";
 
 const users = require("../../components/Users/users.json");
 const initialState = {
@@ -17,6 +21,14 @@ export function userReducer(state = initialState, action) {
       return {
         ...state,
         users: action.payload.users,
+      };
+    case CHANGE_USER:
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          [action.payload.key]: action.payload.user,
+        },
       };
     default:
       return state;

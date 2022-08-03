@@ -3,6 +3,7 @@ import {
   CHANGE_REGISTER_FORM_CONTROL,
   DELETE_USER,
   REGISTER_ACCOUNT_SUCCESS,
+  CHANGE_USER,
 } from "./actionTypes";
 import { registrationFormError } from "./registration";
 import { toast } from "react-toastify";
@@ -73,6 +74,16 @@ export function deleteUser(users, key) {
     type: DELETE_USER,
     payload: {
       users: users,
+    },
+  };
+}
+
+export function changeUser(user, key) {
+  return {
+    type: CHANGE_USER,
+    payload: {
+      user,
+      key,
     },
   };
 }

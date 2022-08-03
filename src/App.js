@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { HelloWorld } from "./components/HelloWorld";
 import { LogIn } from "./components/LogIn/LogIn";
 import RegistrationForm from "./components/Registration/Registration";
+import { EditUser } from "./components/Users/User/EditUser";
 import { Users } from "./components/Users/Users";
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
         <Route path="/registration" element={<RegistrationForm />} />
         <Route path="/logIn" element={<LogIn />} />
         <Route path="/users" element={<Users />} />
+        <Route path="/user/:id" element={<EditUser />} />
         <Route path="/" element={<HelloWorld />} />
       </Routes>
     );
