@@ -5,6 +5,7 @@ import {
   CHANGE_LOG_IN_FORM_CONTROL,
 } from "./actionTypes";
 import { registerAccountSuccess } from "./user";
+import { startUrl } from "../../utils/url";
 
 export const logIn = (formControls) => {
   const controls = ["email", "password"];
@@ -14,8 +15,9 @@ export const logIn = (formControls) => {
         email: formControls.email.value,
         password: formControls.password.value,
       };
-      let url = "http://localhost:8000/api/v1/auth/jwt/create/";
+      let url = startUrl + "api/v1/auth/jwt/create/";
       const response = await axios.post(url, logInData);
+      console.log(response);
       const data = response.data;
       const token = data.access;
       localStorage.setItem("token", token);

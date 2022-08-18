@@ -5,6 +5,7 @@ import { changeControl } from "../../store/actions/registration";
 import { logInFormError } from "../../store/actions/logIn";
 import Button from "../UI/Button/Button";
 import Input from "../UI/Input/Input";
+import { Toast } from "../UI/Toast/Toast";
 
 export function LogIn() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ export function LogIn() {
   return (
     <div className="container">
       <div className="row">
+        <Toast />
         <h1>Вход</h1>
         {formErrorMessage ? (
           <div className="alert alert-danger">{formErrorMessage}</div>

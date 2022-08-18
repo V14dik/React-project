@@ -1,9 +1,18 @@
 import React from "react";
 import { User } from "./User/User";
 import { useSelector } from "react-redux";
+import { startUrl } from "../../utils/url";
+import axios from "axios";
+
+async function getUsers() {
+  let url = `${startUrl}api/v1/users/`;
+  const response = await axios.get(url);
+  console.log(response);
+}
 
 export const Users = () => {
   const { users } = useSelector(({ user }) => user);
+  getUsers();
   return (
     <div className="container text-center">
       <h2>Users</h2>

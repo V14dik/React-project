@@ -7,6 +7,7 @@ import {
 } from "./actionTypes";
 import { registrationFormError } from "./registration";
 import { toast } from "react-toastify";
+import { startUrl } from "../../utils/url";
 
 export function registerAccount(formControls) {
   const controls = ["email", "password", "re_password"];
@@ -17,8 +18,9 @@ export function registerAccount(formControls) {
         password: formControls.password.value,
         re_password: formControls.repeatPassword.value,
       };
-      let url = "http://localhost:8000/api/v1/auth/jwt/register/";
+      let url = startUrl + "api/v1/auth/jwt/register/";
       const response = await axios.post(url, regData);
+      console.log(response);
       const data = response.data;
       const token = data.access;
       localStorage.setItem("token", token);
