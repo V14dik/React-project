@@ -17,7 +17,6 @@ export const logIn = (formControls) => {
       };
       let url = startUrl + "api/v1/auth/jwt/create/";
       const response = await axios.post(url, logInData);
-      console.log(response);
       const data = response.data;
       const token = data.access;
       localStorage.setItem("token", token);

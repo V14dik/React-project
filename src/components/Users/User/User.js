@@ -17,8 +17,7 @@ export const User = (props) => {
         className="img-thumbnail w-75 "
       />
       <div>
-        <p>{props.user.userName}</p>
-        <p>{props.user.userMail}</p>
+        <p>{props.user.email}</p>
       </div>
       <div className="d-flex justify-content-around w-100">
         <Link className="btn btn-warning" to={"/user/" + props.index}>

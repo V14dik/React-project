@@ -2,20 +2,28 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { changeUser } from "../../../store/actions/user";
+import { startUrl } from "../../../utils/url";
+//import { changeUser } from "../../../store/actions/user";
+import axios from "axios";
+
+async function changeUser(user) {
+  console.log(user);
+  const url = startUrl + `api/v1/users/${user.id}/`;
+  const response = axios.post(url, user);
+  //console.log(response);
+}
 
 export const EditUser = () => {
   const dispatch = useDispatch();
   const { users } = useSelector(({ user }) => user);
-  const id = useParams().id;
-  const user = users[id];
-  const name = React.createRef();
+  const index = useParams().id;
+  const user = users[index];
   const mail = React.createRef();
 
   const saveChanges = () => {
-    user.userName = name.current.value;
-    user.userMail = mail.current.value;
-    dispatch(changeUser(user, id));
+    user.email = mail.current.value;
+    //dispatch(changeUser(user, id));
+    changeUser(user);
   };
 
   return (
@@ -25,14 +33,13 @@ export const EditUser = () => {
         className=" w-75 "
       />
       <div className="d-flex flex-column gap-2 w-75">
-        <label htmlFor="user_name">Name:</label>
-        <input id="user_name" defaultValue={user.userName} ref={name} />
         <label htmlFor="user_mail">Mail:</label>
-        <input id="user_mail" defaultValue={user.userMail} ref={mail} />
+        <input id="user_mail" defaultValue={user.email} ref={mail} />
       </div>
-      <Link to={"/users"} onClick={saveChanges} className="btn btn-success">
+      <button onClick={saveChanges}>Save</button>
+      {/* <Link to={"/users"} onClick={saveChanges} className="btn btn-success">
         Save
-      </Link>
+      </Link> */}
     </div>
   );
 };

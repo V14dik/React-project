@@ -4,6 +4,7 @@ import {
   DELETE_USER,
   REGISTER_ACCOUNT_SUCCESS,
   CHANGE_USER,
+  GET_USERS,
 } from "./actionTypes";
 import { registrationFormError } from "./registration";
 import { toast } from "react-toastify";
@@ -69,6 +70,27 @@ export function registerAccountError(controlName, control) {
     },
   };
 }
+export const getUsers = () => {
+  return async (dispatch) => {
+    try {
+      let url = startUrl + "api/v1/users/";
+      const response = await axios.get(url);
+      const users = response.data;
+      dispatch(setUsers(users));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export function setUsers(users) {
+  return {
+    type: GET_USERS,
+    payload: {
+      users: users,
+    },
+  };
+}
 
 export function deleteUser(users, key) {
   delete users[key];
@@ -81,6 +103,15 @@ export function deleteUser(users, key) {
 }
 
 export function changeUser(user, key) {
+  console.log(key);
+  const data = {
+    id: user.id,
+    email: user.email,
+  };
+  console.log(data);
+  const url = startUrl + `api/v1/users/${user.id}/`;
+  const response = axios.put(url, user);
+  console.log(response);
   return {
     type: CHANGE_USER,
     payload: {

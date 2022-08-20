@@ -2,12 +2,12 @@ import {
   REGISTER_ACCOUNT_SUCCESS,
   DELETE_USER,
   CHANGE_USER,
+  GET_USERS,
 } from "../actions/actionTypes";
 
-const users = require("../../components/Users/users.json");
 const initialState = {
   userToken: "",
-  users: users,
+  users: [],
 };
 
 export function userReducer(state = initialState, action) {
@@ -29,6 +29,11 @@ export function userReducer(state = initialState, action) {
           ...state.users,
           [action.payload.key]: action.payload.user,
         },
+      };
+    case GET_USERS:
+      return {
+        ...state,
+        users: action.payload.users,
       };
     default:
       return state;

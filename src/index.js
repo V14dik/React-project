@@ -17,6 +17,8 @@ export const store = configureStore({
   middleware: middleware,
 });
 
+//const store = createStore(rootReducer, applyMiddleware(thunk));
+
 const app = (
   <Provider store={store}>
     <BrowserRouter>
