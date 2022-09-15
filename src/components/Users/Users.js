@@ -1,14 +1,13 @@
 import { User } from "./User/User";
 import { useSelector, useDispatch } from "react-redux";
-import { getUsers, setUsers } from "../../store/actions/user";
+import { getUsers } from "../../store/actions/user";
 import { useEffect } from "react";
 
 export const Users = () => {
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(getUsers("asdasd"));
-  }, []);
+    dispatch(getUsers());
+  }, [dispatch]);
   const { users } = useSelector(({ user }) => user);
   return (
     <div className="container text-center">
@@ -17,7 +16,12 @@ export const Users = () => {
         {users.length ? (
           users.map((user, index) => {
             return (
-              <User user={user} index={index} users={users} key={user.id + user.email} />
+              <User
+                user={user}
+                index={index}
+                users={users}
+                key={user.id + user.email}
+              />
             );
           })
         ) : (

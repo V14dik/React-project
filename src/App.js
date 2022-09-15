@@ -5,6 +5,7 @@ import { LogIn } from "./components/LogIn/LogIn";
 import RegistrationForm from "./components/Registration/Registration";
 import { EditUser } from "./components/Users/User/EditUser";
 import { Users } from "./components/Users/Users";
+import { AddPost } from "./components/AddPost/AddPost";
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
         <Route path="/registration" element={<RegistrationForm />} />
         <Route path="/logIn" element={<LogIn />} />
         <Route path="/users" element={<Users />} />
+        <Route path="/add_post" element={<AddPost />} />
         <Route path="/user/:id" element={<EditUser />} />
         <Route path="/" element={<HelloWorld />} />
       </Routes>

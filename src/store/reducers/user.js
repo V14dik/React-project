@@ -3,10 +3,12 @@ import {
   DELETE_USER,
   CHANGE_USER,
   GET_USERS,
+  REFRESH_TOKEN,
 } from "../actions/actionTypes";
 
 const initialState = {
-  userToken: "",
+  accessToken: "",
+  refreshToken: "",
   users: [],
 };
 
@@ -15,7 +17,8 @@ export function userReducer(state = initialState, action) {
     case REGISTER_ACCOUNT_SUCCESS:
       return {
         ...state,
-        userToken: action.token,
+        accessToken: action.accessToken,
+        refreshToken: action.refreshToken,
       };
     case DELETE_USER:
       return {
@@ -34,6 +37,11 @@ export function userReducer(state = initialState, action) {
       return {
         ...state,
         users: action.payload.users,
+      };
+    case REFRESH_TOKEN:
+      return {
+        ...state,
+        accessToken: action.payload.accessToken,
       };
     default:
       return state;

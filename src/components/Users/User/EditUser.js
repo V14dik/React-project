@@ -2,16 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { startUrl } from "../../../utils/url";
-//import { changeUser } from "../../../store/actions/user";
-import axios from "axios";
-
-async function changeUser(user) {
-  console.log(user);
-  const url = startUrl + `api/v1/users/${user.id}/`;
-  const response = axios.post(url, user);
-  //console.log(response);
-}
+import { changeUser } from "../../../store/actions/user";
+import { Toast } from "../../UI/Toast/Toast";
 
 export const EditUser = () => {
   const dispatch = useDispatch();
@@ -22,14 +14,15 @@ export const EditUser = () => {
 
   const saveChanges = () => {
     user.email = mail.current.value;
-    //dispatch(changeUser(user, id));
-    changeUser(user);
+    dispatch(changeUser(user));
   };
 
   return (
     <div className="container d-flex flex-column justify-content-around align-items-center gap-2 py-2 border border-4 border-success w-50">
+      <Toast />
       <img
         src="https://cdn.pixabay.com/photo/2013/07/13/10/44/man-157699_1280.png"
+        alt="User"
         className=" w-75 "
       />
       <div className="d-flex flex-column gap-2 w-75">

@@ -18,9 +18,15 @@ export const logIn = (formControls) => {
       let url = startUrl + "api/v1/auth/jwt/create/";
       const response = await axios.post(url, logInData);
       const data = response.data;
-      const token = data.access;
-      localStorage.setItem("token", token);
-      dispatch(registerAccountSuccess(token));
+      const accessToken = data.access;
+      const refreshToken = data.refresh;
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      dispatch(registerAccountSuccess(accessToken));
+      toast.success("Welcome!", {
+        position: toast.POSITION.TOP_CENTER,
+        theme: "colored",
+      });
     } catch (error) {
       const errorControlName = Object.keys(error.response.data)[0];
       if (error.response.status === 400) {

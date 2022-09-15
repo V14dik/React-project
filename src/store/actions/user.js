@@ -3,12 +3,13 @@ import {
   CHANGE_REGISTER_FORM_CONTROL,
   DELETE_USER,
   REGISTER_ACCOUNT_SUCCESS,
-  CHANGE_USER,
   GET_USERS,
+  REFRESH_TOKEN,
 } from "./actionTypes";
 import { registrationFormError } from "./registration";
 import { toast } from "react-toastify";
 import { startUrl } from "../../utils/url";
+import jwt_decode from "jwt-decode";
 
 export function registerAccount(formControls) {
   const controls = ["email", "password", "re_password"];
@@ -21,11 +22,11 @@ export function registerAccount(formControls) {
       };
       let url = startUrl + "api/v1/auth/jwt/register/";
       const response = await axios.post(url, regData);
-      console.log(response);
-      const data = response.data;
-      const token = data.access;
-      localStorage.setItem("token", token);
-      dispatch(registerAccountSuccess(token));
+      const accessToken = response.data.access;
+      const refreshToken = response.data.refresh;
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", accessToken);
+      dispatch(registerAccountSuccess(accessToken, refreshToken));
       toast.success("Вы зарегистрированы!", {
         position: toast.POSITION.TOP_CENTER,
         theme: "colored",
@@ -53,10 +54,11 @@ export function registerAccount(formControls) {
   };
 }
 
-export function registerAccountSuccess(token) {
+export function registerAccountSuccess(accessToken, refreshToken) {
   return {
     type: REGISTER_ACCOUNT_SUCCESS,
-    token: token,
+    accessToken: accessToken,
+    refreshToken: refreshToken,
   };
 }
 
@@ -70,6 +72,7 @@ export function registerAccountError(controlName, control) {
     },
   };
 }
+
 export const getUsers = () => {
   return async (dispatch) => {
     try {
@@ -78,7 +81,10 @@ export const getUsers = () => {
       const users = response.data;
       dispatch(setUsers(users));
     } catch (error) {
-      console.log(error);
+      toast.error(error.message, {
+        position: toast.POSITION.TOP_CENTER,
+        theme: "colored",
+      });
     }
   };
 };
@@ -102,21 +108,51 @@ export function deleteUser(users, key) {
   };
 }
 
-export function changeUser(user, key) {
-  console.log(key);
-  const data = {
-    id: user.id,
-    email: user.email,
+export const changeUser = (user) => {
+  return async (dispatch) => {
+    try {
+      const data = {
+        id: user.id,
+        email: user.email,
+      };
+      const url = startUrl + `api/v1/users/${user.id}/`;
+      const response = await axios.post(url, data);
+      dispatch(getUsers());
+    } catch (error) {
+      toast.error(error.message, {
+        position: toast.POSITION.TOP_CENTER,
+        theme: "colored",
+      });
+    }
   };
-  console.log(data);
-  const url = startUrl + `api/v1/users/${user.id}/`;
-  const response = axios.put(url, user);
-  console.log(response);
+};
+
+export const refreshToken = (refreshToken) => {
+  return async (dispatch) => {
+    try {
+      const data = {
+        refresh: refreshToken,
+      };
+      const url = startUrl + "api/v1/auth/jwt/refresh/";
+      const response = await axios.post(url, data);
+      const accessToken = response.data.access;
+      console.log("newToken: ", accessToken);
+      dispatch(refreshTokenSuccess(accessToken));
+    } catch (error) {
+      toast.error(error.message, {
+        position: toast.POSITION.TOP_CENTER,
+        theme: "colored",
+      });
+    }
+  };
+};
+
+export const refreshTokenSuccess = (accessToken) => {
+  localStorage.setItem("accessToken", accessToken);
   return {
-    type: CHANGE_USER,
+    type: REFRESH_TOKEN,
     payload: {
-      user,
-      key,
+      accessToken,
     },
   };
-}
+};

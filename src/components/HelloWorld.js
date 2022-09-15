@@ -10,6 +10,8 @@ export const HelloWorld = () => {
       <Link to={"/logIn"}>Вход</Link>
       <br />
       <Link to={"/users"}>Пользователи</Link>
+      <br />
+      <Link to={"/add_post "}>Добавить пост</Link>
     </div>
   );
 };

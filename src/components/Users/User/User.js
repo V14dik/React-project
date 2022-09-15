@@ -14,6 +14,7 @@ export const User = (props) => {
     <div className="mb-4 d-flex justify-content-between flex-column align-items-center">
       <img
         src="https://cdn.pixabay.com/photo/2013/07/13/10/44/man-157699_1280.png"
+        alt="User"
         className="img-thumbnail w-75 "
       />
       <div>
