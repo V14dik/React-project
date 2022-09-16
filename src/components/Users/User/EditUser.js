@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { changeUser } from "../../../store/actions/user";
 import { Toast } from "../../UI/Toast/Toast";
@@ -11,10 +11,12 @@ export const EditUser = () => {
   const index = useParams().id;
   const user = users[index];
   const mail = React.createRef();
+  const navigate = useNavigate();
 
   const saveChanges = () => {
     user.email = mail.current.value;
     dispatch(changeUser(user));
+    navigate(-1);
   };
 
   return (
@@ -29,10 +31,9 @@ export const EditUser = () => {
         <label htmlFor="user_mail">Mail:</label>
         <input id="user_mail" defaultValue={user.email} ref={mail} />
       </div>
-      <button onClick={saveChanges}>Save</button>
-      {/* <Link to={"/users"} onClick={saveChanges} className="btn btn-success">
+      <button onClick={saveChanges} className="btn btn-success">
         Save
-      </Link> */}
+      </button>
     </div>
   );
 };

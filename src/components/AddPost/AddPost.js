@@ -11,37 +11,41 @@ import { Toast } from "../UI/Toast/Toast";
 import { toast } from "react-toastify";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
-export const addPost = async (title, category, content, accessToken) => {
-  try {
-    const data = {
-      name: title,
-      content,
-      category,
-    };
-    const url = startUrl + "api/v1/articles/";
-    console.log(accessToken);
-    await axios.post(url, data, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
-  } catch (error) {
-    toast.error(error.message, {
-      position: toast.POSITION.TOP_CENTER,
-      theme: "colored",
-    });
-  }
-};
-
 export const AddPost = () => {
   const dispatch = useDispatch();
-  const postType = React.createRef();
+  const category = React.createRef();
   const title = React.createRef();
 
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
 
+  const addPost = async (title, category, content, accessToken) => {
+    try {
+      const data = {
+        name: title,
+        content,
+        category,
+      };
+      const url = startUrl + "api/v1/articles/";
+      await axios.post(url, data, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+    } catch (error) {
+      if (error.response.status === 401) {
+        dispatch(refreshToken(localStorage.getItem("refreshToken")));
+        accessToken = localStorage.getItem("accessToken");
+        addPost(title, category, content, accessToken);
+        return;
+      }
+      toast.error(error.message, {
+        position: toast.POSITION.TOP_CENTER,
+        theme: "colored",
+      });
+    }
+  };
+
   const createPost = async (category, title, editor) => {
-    //dispatch(refreshToken(localStorage.getItem("refreshToken")));
     const accessToken = localStorage.getItem("accessToken");
     const content = stateToHTML(editor.getCurrentContent());
     addPost(title, category, content, accessToken);
@@ -57,15 +61,15 @@ export const AddPost = () => {
           onSubmit={(event) => {
             event.preventDefault();
             createPost(
-              postType.current.value,
+              category.current.value,
               title.current.value,
               editorState
             );
           }}
         >
           <h1>New post</h1>
-          <label>Post type</label>
-          <input ref={postType}></input>
+          <label>Category</label>
+          <input ref={category}></input>
           <label>Tittle</label>
           <input ref={title}></input>
           <label>Content</label>

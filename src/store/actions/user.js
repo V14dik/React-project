@@ -9,7 +9,6 @@ import {
 import { registrationFormError } from "./registration";
 import { toast } from "react-toastify";
 import { startUrl } from "../../utils/url";
-import jwt_decode from "jwt-decode";
 
 export function registerAccount(formControls) {
   const controls = ["email", "password", "re_password"];
@@ -116,9 +115,18 @@ export const changeUser = (user) => {
         email: user.email,
       };
       const url = startUrl + `api/v1/users/${user.id}/`;
-      const response = await axios.post(url, data);
+      await axios.put(url, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
       dispatch(getUsers());
     } catch (error) {
+      if (error.response.status === 401) {
+        dispatch(refreshToken(localStorage.getItem("refreshToken")));
+        dispatch(changeUser(user));
+        return;
+      }
       toast.error(error.message, {
         position: toast.POSITION.TOP_CENTER,
         theme: "colored",
