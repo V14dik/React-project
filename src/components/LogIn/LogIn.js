@@ -6,12 +6,14 @@ import { logInFormError } from "../../store/actions/logIn";
 import Button from "../UI/Button/Button";
 import Input from "../UI/Input/Input";
 import { Toast } from "../UI/Toast/Toast";
+import { useNavigate } from "react-router-dom";
 
 export function LogIn() {
   const dispatch = useDispatch();
   const { formControls, isFormValid, formErrorMessage } = useSelector(
     ({ logIn }) => logIn
   );
+  const navigate = useNavigate();
 
   const onChangeHandler = (event, controlName) => {
     dispatch(changeControl(formControls, event.target.value, controlName));
@@ -30,6 +32,7 @@ export function LogIn() {
             event.preventDefault();
             dispatch(logInFormError(""));
             dispatch(logIn(formControls));
+            navigate(-1);
           }}
         >
           <Input

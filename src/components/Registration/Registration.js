@@ -7,12 +7,14 @@ import {
 import { registerAccount } from "../../store/actions/user";
 import { useDispatch, useSelector } from "react-redux";
 import { Toast } from "../UI/Toast/Toast";
+import { useNavigate } from "react-router-dom";
 
 function RegistrationForm() {
   const dispatch = useDispatch();
   const { formControls, isFormValid, formErrorMessage } = useSelector(
     ({ register }) => register
   );
+  const navigate = useNavigate();
   const onChangeHandler = (event, controlName) => {
     dispatch(changeControl(formControls, event.target.value, controlName));
   };
@@ -30,6 +32,7 @@ function RegistrationForm() {
             event.preventDefault();
             dispatch(registrationFormError(""));
             dispatch(registerAccount(formControls));
+            navigate(-1);
           }}
         >
           <Input
