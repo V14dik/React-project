@@ -23,10 +23,6 @@ export const logIn = (formControls) => {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
       dispatch(registerAccountSuccess(accessToken));
-      toast.success("Welcome!", {
-        position: toast.POSITION.TOP_CENTER,
-        theme: "colored",
-      });
     } catch (error) {
       const errorControlName = Object.keys(error.response.data)[0];
       if (error.response.status === 400) {

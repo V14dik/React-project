@@ -4,11 +4,13 @@ import {
   CHANGE_USER,
   GET_USERS,
   REFRESH_TOKEN,
+  LOG_OUT,
 } from "../actions/actionTypes";
 
 const initialState = {
   accessToken: "",
   refreshToken: "",
+  isLogIn: false,
   users: [],
 };
 
@@ -19,6 +21,14 @@ export function userReducer(state = initialState, action) {
         ...state,
         accessToken: action.accessToken,
         refreshToken: action.refreshToken,
+        isLogIn: true,
+      };
+    case LOG_OUT:
+      return {
+        ...state,
+        accessToken: "",
+        refreshToken: "",
+        isLogIn: false,
       };
     case DELETE_USER:
       return {

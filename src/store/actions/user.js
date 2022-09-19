@@ -5,6 +5,7 @@ import {
   REGISTER_ACCOUNT_SUCCESS,
   GET_USERS,
   REFRESH_TOKEN,
+  LOG_OUT,
 } from "./actionTypes";
 import { registrationFormError } from "./registration";
 import { toast } from "react-toastify";
@@ -69,6 +70,12 @@ export function registerAccountError(controlName, control) {
       changedInputName: controlName,
       changedInput: { ...control },
     },
+  };
+}
+
+export function logOut() {
+  return {
+    type: LOG_OUT,
   };
 }
 

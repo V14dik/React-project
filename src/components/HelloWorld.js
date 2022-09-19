@@ -1,13 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 export const HelloWorld = () => {
+  const dispatch = useDispatch();
+  const { isLogIn } = useSelector(({ user }) => user);
+  const logOut = () => {
+    dispatch(logOut());
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    window.location.reload(false);
+  };
   return (
     <div>
       <h1>Hello World </h1>
       <Link to={"/registration"}>Регистрация</Link>
       <br />
-      <Link to={"/logIn"}>Вход</Link>
+      {isLogIn ? (
+        <Link to={"/"} onClick={logOut}>
+          Выход
+        </Link>
+      ) : (
+        <Link to={"/logIn"}>Вход</Link>
+      )}
       <br />
       <Link to={"/users"}>Пользователи</Link>
       <br />
