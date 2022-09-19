@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { logOut } from "../store/actions/user";
 
 export const HelloWorld = () => {
   const dispatch = useDispatch();
   const { isLogIn } = useSelector(({ user }) => user);
-  const logOut = () => {
+  const userLogOut = () => {
     dispatch(logOut());
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
-    window.location.reload(false);
   };
   return (
     <div>
@@ -17,7 +17,7 @@ export const HelloWorld = () => {
       <Link to={"/registration"}>Регистрация</Link>
       <br />
       {isLogIn ? (
-        <Link to={"/"} onClick={logOut}>
+        <Link to={"/"} onClick={userLogOut}>
           Выход
         </Link>
       ) : (

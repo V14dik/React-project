@@ -10,7 +10,7 @@ import {
 const initialState = {
   accessToken: "",
   refreshToken: "",
-  isLogIn: false,
+  isLogIn: localStorage.getItem("accessToken") ? true : false,
   users: [],
 };
 
