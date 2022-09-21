@@ -1,7 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "@mui/material/Link";
+import { Link as RouterLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logOut } from "../store/actions/user";
+import { Header } from "./Header/Header";
 
 export const HelloWorld = () => {
   const dispatch = useDispatch();
@@ -13,20 +15,26 @@ export const HelloWorld = () => {
   };
   return (
     <div>
-      <h1>Hello World </h1>
-      <Link to={"/registration"}>Регистрация</Link>
+      <Header />
+      <Link underline="none" color="inherit" component={"span"}>
+        <RouterLink to={"/registration"}>Регистрация</RouterLink>
+      </Link>
       <br />
       {isLogIn ? (
-        <Link to={"/"} onClick={userLogOut}>
-          Выход
+        <Link
+          underline="none"
+          color="inherit"
+          onClick={userLogOut}
+          component={"span"}
+        >
+          <RouterLink to={"/"}>Выход</RouterLink>
         </Link>
       ) : (
-        <Link to={"/logIn"}>Вход</Link>
+        <Link underline="none" color="inherit" component={"span"}>
+          <RouterLink to={"/logIn"}>Вход</RouterLink>
+        </Link>
       )}
       <br />
-      <Link to={"/users"}>Пользователи</Link>
-      <br />
-      <Link to={"/add_post "}>Добавить пост</Link>
     </div>
   );
 };
