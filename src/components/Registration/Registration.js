@@ -2,12 +2,14 @@ import Button from "../UI/Button/Button";
 import Input from "../UI/Input/Input";
 import {
   changeControl,
+  cleanInputs,
   registrationFormError,
 } from "../../store/actions/registration";
 import { registerAccount } from "../../store/actions/user";
 import { useDispatch, useSelector } from "react-redux";
 import { Toast } from "../UI/Toast/Toast";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function RegistrationForm() {
   const dispatch = useDispatch();
@@ -18,6 +20,11 @@ function RegistrationForm() {
   const onChangeHandler = (event, controlName) => {
     dispatch(changeControl(formControls, event.target.value, controlName));
   };
+  useEffect(() => {
+    return () => {
+      dispatch(cleanInputs());
+    };
+  }, []);
 
   return (
     <div className="container">

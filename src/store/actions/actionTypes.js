@@ -9,3 +9,4 @@ export const DELETE_USER = "DELETE_USER";
 export const CHANGE_USER = "CHANGE_USER";
 export const GET_USERS = "GET_USERS";
 export const REFRESH_TOKEN = "REFRESH_TOKEN";
+export const CLEAN_INPUTS = "CLEAN_INPUTS";

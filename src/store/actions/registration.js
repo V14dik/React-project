@@ -2,6 +2,7 @@ import {
   CHANGE_REGISTER_FORM_CONTROL,
   CHANGE_REGISTRATION_FORM_ERROR_MESSAGE,
   CHANGE_LOG_IN_FORM_CONTROL,
+  CLEAN_INPUTS,
 } from "./actionTypes";
 import {
   validateRequeired,
@@ -72,5 +73,11 @@ export function registrationFormError(formErrorMessage) {
     payload: {
       errorMessage: formErrorMessage,
     },
+  };
+}
+
+export function cleanInputs() {
+  return {
+    type: CLEAN_INPUTS,
   };
 }

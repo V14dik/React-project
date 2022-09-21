@@ -1,6 +1,7 @@
 import {
   CHANGE_LOG_IN_FORM_CONTROL,
   CHANGE_LOG_IN_FORM_ERROR,
+  CLEAN_INPUTS,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -37,6 +38,10 @@ export function logInReducer(state = initialState, action) {
       return {
         ...state,
         formErrorMessage: action.payload.errorMessage,
+      };
+    case CLEAN_INPUTS:
+      return {
+        ...initialState,
       };
     default:
       return state;

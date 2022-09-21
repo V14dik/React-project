@@ -1,6 +1,7 @@
 import {
   CHANGE_REGISTER_FORM_CONTROL,
   CHANGE_REGISTRATION_FORM_ERROR_MESSAGE,
+  CLEAN_INPUTS,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -43,6 +44,10 @@ export function registerReducer(state = initialState, action) {
       return {
         ...state,
         formErrorMessage: action.payload.errorMessage,
+      };
+    case CLEAN_INPUTS:
+      return {
+        ...initialState,
       };
     default:
       return state;
