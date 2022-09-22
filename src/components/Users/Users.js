@@ -13,8 +13,8 @@ export const Users = () => {
   return (
     <div className="container text-center">
       <h2>Users</h2>
+      <Toast />
       <div className="row row-cols-4">
-        <Toast />
         {users.length ? (
           users.map((user, index) => {
             return (

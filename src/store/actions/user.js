@@ -27,10 +27,6 @@ export function registerAccount(formControls) {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", accessToken);
       dispatch(registerAccountSuccess(accessToken, refreshToken));
-      toast.success("Вы зарегистрированы!", {
-        position: toast.POSITION.TOP_CENTER,
-        theme: "colored",
-      });
     } catch (error) {
       const errorControlName = Object.keys(error.response.data)[0];
       if (error.response.status === 400) {
