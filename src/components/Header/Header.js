@@ -9,6 +9,7 @@ import {
   Avatar,
   Divider,
   ListItemIcon,
+  Link,
 } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { logOut } from "../../store/actions/user";
@@ -36,18 +37,21 @@ export function Header() {
   };
   return (
     <>
-      <AppBar position="static">
+      <AppBar
+        position="static"
+        sx={{ display: "flex", justifyContent: "space-around" }}
+      >
         <Toolbar>
-          <Typography
-            variant="h6"
+          <Link
             component={RouterLink}
             to={"/"}
-            color={"white"}
             underline="none"
             sx={{ flexGrow: 2 }}
           >
-            Sports Hub
-          </Typography>
+            <Typography variant="h6" color={"white"}>
+              Sports Hub
+            </Typography>
+          </Link>
 
           <Navigation />
           <AccountCircleIcon

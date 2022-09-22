@@ -1,8 +1,4 @@
 import React from "react";
-import Link from "@mui/material/Link";
-import { Link as RouterLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { logOut } from "../store/actions/user";
 
 export const HelloWorld = () => {
   // const dispatch = useDispatch();

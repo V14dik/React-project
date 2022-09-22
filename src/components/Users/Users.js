@@ -3,35 +3,46 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUsers } from "../../store/actions/user";
 import { useEffect } from "react";
 import { Toast } from "../UI/Toast/Toast";
+import {
+  Grid,
+  Typography,
+  Container,
+  CircularProgress,
+  Stack,
+} from "@mui/material";
 
 export const Users = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsers());
-  });
+  }, []);
   const { users } = useSelector(({ user }) => user);
   return (
-    <div className="container text-center">
-      <h2>Users</h2>
+    <Container maxWidth="lg">
+      <Typography
+        variant="h3"
+        component={"h1"}
+        align="center"
+        gutterBottom={true}
+      >
+        Users
+      </Typography>
       <Toast />
-      <div className="row row-cols-4">
-        {users.length ? (
-          users.map((user, index) => {
+      {users.length ? (
+        <Grid container spacing={2}>
+          {users.map((user, index) => {
             return (
-              <User
-                user={user}
-                index={index}
-                users={users}
-                key={user.id + user.email}
-              />
+              <Grid item sm={3} key={user.id + user.email}>
+                <User user={user} index={index} users={users} />
+              </Grid>
             );
-          })
-        ) : (
-          <div className="text-center w-100">
-            <div className="spinner-border" role="status" />
-          </div>
-        )}
-      </div>
-    </div>
+          })}
+        </Grid>
+      ) : (
+        <Stack alignItems="center">
+          <CircularProgress />
+        </Stack>
+      )}
+    </Container>
   );
 };

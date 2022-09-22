@@ -2,6 +2,14 @@ import React from "react";
 import { deleteUser } from "../../../store/actions/user";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
 
 export const User = (props) => {
   const dispatch = useDispatch();
@@ -11,23 +19,36 @@ export const User = (props) => {
   };
 
   return (
-    <div className="mb-4 d-flex justify-content-between flex-column align-items-center">
-      <img
-        src="https://cdn.pixabay.com/photo/2013/07/13/10/44/man-157699_1280.png"
+    <Card>
+      <CardMedia
+        image="https://cdn.pixabay.com/photo/2013/07/13/10/44/man-157699_1280.png"
         alt="User"
-        className="img-thumbnail w-75 "
+        component="img"
       />
-      <div>
-        <p>{props.user.email}</p>
-      </div>
-      <div className="d-flex justify-content-around w-100">
-        <Link className="btn btn-warning" to={"/user/" + props.index}>
-          edit
-        </Link>
-        <button className="btn btn-danger" onClick={onDeleteHandler}>
-          delete
-        </button>
-      </div>
-    </div>
+      <CardContent>
+        <Typography
+          gutterBottom
+          align="center"
+          variant="subtitle2"
+          component="p"
+          color="black"
+        >
+          {props.user.email}
+        </Typography>
+      </CardContent>
+      <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Button
+          component={Link}
+          to={"/user/" + props.index}
+          variant="contained"
+          size="small"
+        >
+          Edit
+        </Button>
+        <Button onClick={onDeleteHandler} variant="contained" size="small">
+          Delete
+        </Button>
+      </CardActions>
+    </Card>
   );
 };
