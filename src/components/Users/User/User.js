@@ -37,14 +37,12 @@ export const User = (props) => {
         </Typography>
       </CardContent>
       <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Button
-          component={Link}
-          to={"/user/" + props.index}
-          variant="contained"
-          size="small"
-        >
-          Edit
-        </Button>
+        <Link to={"/user/" + props.index} underline="none">
+          <Button variant="contained" size="small">
+            Edit
+          </Button>
+        </Link>
+
         <Button onClick={onDeleteHandler} variant="contained" size="small">
           Delete
         </Button>

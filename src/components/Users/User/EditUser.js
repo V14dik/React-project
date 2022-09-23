@@ -58,7 +58,11 @@ export const EditUser = () => {
               >
                 Mail:
               </Typography>
-              <TextField id="user_mail" defaultValue={user.email} ref={mail} />
+              <TextField
+                id="user_mail"
+                defaultValue={user.email}
+                inputRef={mail}
+              />
             </CardContent>
             <CardActions>
               <Button
