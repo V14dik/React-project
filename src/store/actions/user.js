@@ -147,7 +147,6 @@ export const refreshToken = (refreshToken) => {
       const url = startUrl + "api/v1/auth/jwt/refresh/";
       const response = await axios.post(url, data);
       const accessToken = response.data.access;
-      console.log("newToken: ", accessToken);
       dispatch(refreshTokenSuccess(accessToken));
     } catch (error) {
       toast.error(error.message, {

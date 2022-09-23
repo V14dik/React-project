@@ -10,6 +10,14 @@ import { refreshToken } from "../../store/actions/user";
 import { Toast } from "../UI/Toast/Toast";
 import { toast } from "react-toastify";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import {
+  Container,
+  TextField,
+  Typography,
+  Button,
+  Paper,
+  FormGroup,
+} from "@mui/material";
 
 export const AddPost = () => {
   const dispatch = useDispatch();
@@ -28,7 +36,7 @@ export const AddPost = () => {
         category,
       };
       const url = startUrl + "api/v1/articles/";
-      await axios.post(url, data, {
+      const response = await axios.post(url, data, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
     } catch (error) {
@@ -52,42 +60,42 @@ export const AddPost = () => {
   };
 
   return (
-    <div className="container">
-      <div className="row ">
-        <Toast />
-        <form
-          className="d-flex flex-column gap-2"
-          data-color-mode="light"
-          onSubmit={(event) => {
-            event.preventDefault();
-            createPost(
-              category.current.value,
-              title.current.value,
-              editorState
-            );
-          }}
-        >
-          <h1>New post</h1>
-          <label>Category</label>
-          <input ref={category}></input>
-          <label>Tittle</label>
-          <input ref={title}></input>
+    <Container>
+      <Toast />
+      <Typography gutterBottom align="center" component="h1" variant="h3">
+        New post
+      </Typography>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          createPost(category.current.value, title.current.value, editorState);
+        }}
+      >
+        <FormGroup component="form" sx={{ gap: "10px" }}>
+          <TextField label="Category" inputRef={category}></TextField>
+          <TextField label="Tittle" inputRef={title}></TextField>
           <label>Content</label>
-          <div
-            className=" border border-dark border-2"
-            style={{ minHeight: "400px" }}
-          >
+          <Paper sx={{ minHeight: "400px" }}>
             <Editor
               wrapperClassName="demo-wrapper"
               editorClassName="demo-editor"
               editorState={editorState}
               onEditorStateChange={setEditorState}
+              editorStyle={{ padding: "10px" }}
             />
+          </Paper>
+          <div>
+            <Button
+              component="button"
+              type="submit"
+              variant="contained"
+              size="large"
+            >
+              Add post
+            </Button>
           </div>
-
-          <button className="btn btn-primary w-25">Add post</button>
-        </form>
-      </div>
-    </div>
+        </FormGroup>
+      </form>
+    </Container>
   );
 };
