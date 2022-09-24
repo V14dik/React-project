@@ -41,12 +41,12 @@ export function Header() {
         position="static"
         sx={{ display: "flex", justifyContent: "space-around" }}
       >
-        <Toolbar>
+        <Toolbar sx={{ justifyContent: "space-between" }}>
           <Link
             component={RouterLink}
             to={"/"}
             underline="none"
-            sx={{ flexGrow: 2 }}
+            // sx={{ flexGrow: 2 }}
           >
             <Typography variant="h6" color={"white"}>
               Sports Hub

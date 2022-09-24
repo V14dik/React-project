@@ -2,7 +2,9 @@ import { Link, Breadcrumbs } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 export function Navigation() {
   return (
-    <Breadcrumbs sx={{ flexGrow: 2 }}>
+    <Breadcrumbs
+    // sx={{ flexGrow: 2 }}
+    >
       <Link
         component={RouterLink}
         to={"/add_post"}
