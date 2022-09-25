@@ -7,6 +7,7 @@ import { LogIn } from "./components/LogIn/LogIn";
 import { Users } from "./components/Users/Users";
 import { AddPost } from "./components/AddPost/AddPost";
 import { EditUser } from "./components/Users/User/EditUser";
+import { EditPost } from "./components/EditPost/EditPost";
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
             <Route path="/logIn" element={<LogIn />} />
             <Route path="/users" element={<Users />} />
             <Route path="/add_post" element={<AddPost />} />
+            <Route path="/edit_post/:id" element={<EditPost />} />
             <Route path="/user/:id" element={<EditUser />} />
             <Route path="/" element={<HomePage />} />
           </Routes>

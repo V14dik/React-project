@@ -25,7 +25,9 @@ export function HomePage() {
     }
   };
   useEffect(() => {
-    getPosts();
+    if (localStorage.getItem("accessToken")) {
+      getPosts();
+    }
   }, []);
 
   return (
@@ -33,7 +35,7 @@ export function HomePage() {
       {posts.length ? (
         <Grid
           container
-          spacing={1}
+          spacing={2}
           sx={{ alignItems: "center", padding: "20px" }}
         >
           {posts.map((post, index) => {
