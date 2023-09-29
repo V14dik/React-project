@@ -39,7 +39,7 @@ function RegistrationForm() {
           event.preventDefault();
           dispatch(registrationFormError(""));
           dispatch(registerAccount(formControls));
-          navigate(-1);
+          //navigate(-1);
         }}
       >
         <Input

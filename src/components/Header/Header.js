@@ -42,12 +42,7 @@ export function Header() {
         sx={{ display: "flex", justifyContent: "space-around" }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Link
-            component={RouterLink}
-            to={"/"}
-            underline="none"
-            // sx={{ flexGrow: 2 }}
-          >
+          <Link component={RouterLink} to={"/"} underline="none">
             <Typography variant="h6" color={"white"}>
               Sports Hub
             </Typography>

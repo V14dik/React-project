@@ -38,7 +38,7 @@ export function HomePage() {
           spacing={2}
           sx={{ alignItems: "center", padding: "20px" }}
         >
-          {posts.map((post, index) => {
+          {posts.reverse().map((post, index) => {
             return (
               <Grid item sm={12} key={index} sx={{ margin: "auto" }}>
                 <ShortPost post={post} />
